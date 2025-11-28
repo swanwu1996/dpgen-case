@@ -1,0 +1,35 @@
+{
+  "api_version": "1.0",
+  "deepmd_version": "2",
+
+  "fp": {
+    "command": "mpirun -np 32 vasp_ncl",
+    "group_size": 1,
+
+    "machine": {
+      "batch_type": "Slurm",
+      "context_type": "LocalContext",
+      "local_root": "./",
+      "remote_root": "./dpgen_init_bulk"
+    },
+
+    "resources": {
+      "number_node": 1,
+      "cpu_per_node": 32,
+      "gpu_per_node": 0,
+      "queue_name": "mix",
+      "group_size": 1,
+
+      "module_purge": false,
+      "module_unload_list": [],
+      "module_list": [
+        "vasp"
+      ],
+
+      "custom_flags": [
+        "#SBATCH --job-name=dpgen_fp",
+        "#SBATCH --output=dpgen_fp.%j.out"
+      ]
+    }
+  }
+}
