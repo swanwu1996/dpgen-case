@@ -1,0 +1,35 @@
+SYSTEM  = CsPbI3  AIMD
+
+# --- Electronic ---
+GGA     = PE
+ENCUT   = 520
+PREC    = Accurate
+LASPH   = .TRUE.
+ISMEAR  = 0
+SIGMA   = 0.05
+LREAL   = Auto
+
+# --- SOC + noncollinear ---
+LSORBIT       = .TRUE.
+LNONCOLLINEAR = .TRUE.
+ISYM          = 0
+MAGMOM = 40*0 40*0 40*0
+SAXIS  = 0 0 1    
+
+# --- MD: true NpT (Parrinello–Rahman + Langevin) ---
+IBRION  = 0
+MDALGO  = 3               # Langevin thermostat for NpT
+ISIF    = 3               # variable cell (volume+shape)
+POTIM   = 2               # 2 fs
+NSW     = 10             
+PSTRESS = 0               # 0 kB = 0 GPa  (1 bar -> 0.001)
+TEBEG   = 600             # 600K
+TEEND   = 600             # 恒温
+
+# --- Langevin params (order matches POTCAR species: Cs I Pb) ---
+LANGEVIN_GAMMA   = 5 5 5  # ps^-1 for atoms: Cs I Pb
+LANGEVIN_GAMMA_L = 2      # ps^-1 for lattice
+PMASS            = 1000   # amu (barostat mass; 可按收敛调 1000→300→100)
+
+LWAVE   = .FALSE.
+LCHARG  = .FALSE.

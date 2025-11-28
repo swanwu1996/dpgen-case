@@ -1,0 +1,35 @@
+SYSTEM = relax
+ISTART = 0
+ICHARG = 2
+ENCUT  = 520
+PREC   = Accurate
+EDIFF  = 1E-5
+EDIFFG = -0.02
+
+# 结构优化
+IBRION  = 2        # CG
+ISIF    = 8        # 形状固定(立方)，体积可变 + 原子位置
+NSW     = 200
+POTIM   = 0.5      # 如出现振荡可降到 0.3–0.5
+
+# 电子步
+ALGO   = Normal
+NELM   = 100
+ISMEAR = 0         # 半导体/窄隙推荐
+SIGMA  = 0.05
+
+# 保持 Pm-3m 对称
+ISYM    = 2
+SYMPREC = 1E-6
+
+# 对卤化物/重元素友好设置
+LASPH  = .TRUE.
+ADDGRID= .TRUE.
+LREAL  = Auto
+
+# 色散（可选）
+IVDW   = 12
+
+# 并行/杂项
+LWAVE  = .FALSE.
+LCHARG = .FALSE.
