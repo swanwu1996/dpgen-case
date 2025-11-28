@@ -1,0 +1,28 @@
+{
+  "stages": [1, 2, 3, 4],
+
+  "elements": ["Cs", "I", "Pb"],
+
+  "from_poscar": true,
+  "from_poscar_path": "POSCAR",
+
+  "super_cell": [1, 1, 1],
+
+  "relax_incar": "INCAR_rlx",
+  "md_incar": "INCAR_md",
+
+  "potcars": ["POTCAR"],
+
+  "scale": [0.98, 1.00, 1.02],
+  "skip_relax": false,
+
+  "pert_numb": 10,
+  "pert_box": 0.03,
+  "pert_atom": 0.05,
+
+  "md_nstep": 50,
+  "coll_ndata": 500,
+
+  "type_map": ["Cs", "I", "Pb"],
+  "init_fp_style": "VASP"
+}
