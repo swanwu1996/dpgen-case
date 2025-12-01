@@ -1,0 +1,160 @@
+{
+    "type_map": [
+        "Cs",
+        "I",
+        "Pb"
+    ],
+    "mass_map": [
+        132.905,
+        126.904,
+        207.2
+    ],
+
+    "init_data_prefix": "/home/qhwu/0713/4-dpgen/1-init_bulk",
+    "init_data_sys": [
+        "POSCAR.01x01x01/02.md/sys-0008-0024-0008/deepmd"
+    ],
+
+    "sys_configs_prefix": "/home/qhwu/0713/4-dpgen/1-init_bulk",
+    "sys_configs": [
+        [
+            "POSCAR.01x01x01/01.scale_pert/sys-0008-0024-0008/scale*/00000*/POSCAR"
+        ],
+        [
+            "POSCAR.01x01x01/01.scale_pert/sys-0008-0024-0008/scale*/00001*/POSCAR"
+        ]
+    ],
+
+    "_comment1": "以上是 dpgen 初始数据和探索构型的路径",
+
+    "numb_models": 4,
+
+    "default_training_param": {
+        "model": {
+            "type_map": [
+                "Cs",
+                "I",
+                "Pb"
+            ],
+            "descriptor": {
+                "type": "se_a",
+                "sel": [
+                    20,
+                    20,
+                    20
+                ],
+                "rcut_smth": 0.5,
+                "rcut": 6.0,
+                "neuron": [
+                    120,
+                    120,
+                    120
+                ],
+                "resnet_dt": true,
+                "axis_neuron": 12,
+                "seed": 1
+            },
+            "fitting_net": {
+                "neuron": [
+                    50,
+                    100,
+                    200
+                ],
+                "resnet_dt": false,
+                "seed": 1
+            }
+        },
+
+        "learning_rate": {
+            "type": "exp",
+            "start_lr": 0.001,
+            "decay_steps": 1000
+        },
+
+        "loss": {
+            "type": "ener",
+            "start_pref_e": 0.02,
+            "limit_pref_e": 2.0,
+            "start_pref_f": 1000.0,
+            "limit_pref_f": 1.0,
+            "start_pref_v": 0.01,
+            "limit_pref_v": 0.1
+        },
+
+        "training": {
+            "training_data": {
+                "systems": "../data/"
+            },
+            "numb_steps": 50000,
+            "seed": 10,
+            "disp_file": "lcurve.out",
+            "disp_freq": 1000,
+            "save_freq": 5000
+        }
+    },
+    "model_devi_dt": 0.002,
+    "model_devi_skip": 0,
+    "model_devi_f_trust_lo": 0.03,
+    "model_devi_f_trust_hi": 0.25,
+    "model_devi_clean_traj": true,
+    "model_devi_jobs": [
+        {
+            "sys_idx": [
+                0, 1
+            ],
+            "temps": [
+                550
+            ],
+            "press": [
+                0.0
+            ],
+            "trj_freq": 10,
+            "nsteps": 20000,
+            "ensemble": "nvt",
+            "_idx": "00"
+        },
+        {
+            "sys_idx": [
+                0, 1
+            ],
+            "temps": [
+                600
+            ],
+            "press": [
+                0.0
+            ],
+            "trj_freq": 10,
+            "nsteps": 20000,
+            "ensemble": "nvt",
+            "_idx": "01"
+        },
+        {
+            "sys_idx": [
+                0, 1
+            ],
+            "temps": [
+                650
+            ],
+            "press": [
+                0.0
+            ],
+            "trj_freq": 10,
+            "nsteps": 20000,
+            "ensemble": "nvt",
+            "_idx": "02"
+        }
+    ],
+    "_comment3": "thats all",
+
+    "fp_style": "vasp",
+    "shuffle_poscar": false,
+
+    "fp_task_max": 30,
+    "fp_task_min": 2,
+
+    "fp_pp_path": "./",
+    "fp_pp_files": [
+        "POTCAR_Cs","POTCAR_I","POTCAR_Pb"
+    ],
+    "fp_incar": "./INCAR_dpgen"
+}

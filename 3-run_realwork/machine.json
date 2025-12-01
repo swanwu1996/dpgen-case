@@ -1,0 +1,105 @@
+{
+  "api_version": "1.0",
+  "deepmd_version": "3",
+
+  "train": {
+    "command": "dp",
+    "group_size": 1,
+
+    "machine": {
+      "batch_type": "Slurm",
+      "context_type": "LocalContext",
+      "local_root": "./",
+      "remote_root": "./dpgen_run/train"
+    },
+
+    "resources": {
+      "number_node": 1,
+      "cpu_per_node": 4,
+      "gpu_per_node": 1,
+      "queue_name": "mix",
+      "group_size": 4,
+
+      "module_purge": false,
+      "module_unload_list": [],
+      "module_list": [
+        "anaconda"
+      ],
+
+      "source_list": [
+        " /home/qhwu/0713/4-dpgen/env_deepmd.sh"
+      ],
+
+      "custom_flags": [
+        "#SBATCH --job-name=dpgen_train",
+        "#SBATCH --output=dpgen_train.%j.out"
+      ]
+    }
+  },
+
+  "model_devi": {
+    "command": "lmp_mpi -in in.lammps",
+    "group_size": 1,
+
+    "machine": {
+      "batch_type": "Slurm",
+      "context_type": "LocalContext",
+      "local_root": "./",
+      "remote_root": "./dpgen_run/model_devi"
+    },
+
+    "resources": {
+      "number_node": 1,
+      "cpu_per_node": 4,
+      "gpu_per_node": 1,
+      "queue_name": "mix",
+      "group_size": 4,
+
+      "module_purge": false,
+      "module_unload_list": [],
+      "module_list": [
+        "anaconda"
+      ],
+
+      "source_list": [
+        " /home/qhwu/0713/4-dpgen/env_deepmd.sh"
+      ],
+
+      "custom_flags": [
+        "#SBATCH --job-name=dpgen_md",
+        "#SBATCH --output=dpgen_md.%j.out"
+      ]
+    }
+  },
+
+  "fp": {
+    "command": "mpirun -np 32 vasp_ncl",
+    "group_size": 1,
+
+    "machine": {
+      "batch_type": "Slurm",
+      "context_type": "LocalContext",
+      "local_root": "./",
+      "remote_root": "./dpgen_run/fp"
+    },
+
+    "resources": {
+      "number_node": 1,
+      "cpu_per_node": 32,
+      "gpu_per_node": 0,
+      "queue_name": "mix",
+      "group_size": 1,
+
+      "module_purge": false,
+      "module_unload_list": [],
+      "module_list": [
+        "vasp"
+      ],
+
+      "custom_flags": [
+        "#SBATCH --job-name=dpgen_fp",
+        "#SBATCH --output=dpgen_fp.%j.out"
+      ]
+    }
+  }
+}
